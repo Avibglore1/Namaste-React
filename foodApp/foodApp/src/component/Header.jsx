@@ -6,7 +6,7 @@ function Header() {
     <div className='flex flex-row justify-between items-center border-2'>
         <div>
             <img src={LOGO_URL}
-            alt="" className='w-32' />
+            alt="" className='w-20' />
         </div>
         <div className='flex gap-3 mr-5'>
             <a href="">Home</a>
@@ -19,3 +19,5 @@ function Header() {
 }
 
 export default Header
+
+// 
