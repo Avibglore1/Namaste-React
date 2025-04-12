@@ -5,6 +5,7 @@ import Shimmer from './Shimmer';
 
 function Body() {
   const [movieList,setMovieList] = useState([]);
+  const [filteredMovieList,setFilteredMovieList] = useState([]);
   const [searchText,setSearchText] = useState("");
 
   useEffect(()=>{
@@ -14,12 +15,13 @@ function Body() {
   const fetchData = async () =>{
     const data = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
     const json = await data.json();
-    setMovieList(json.results)
+    setMovieList(json.results);
+    setFilteredMovieList(json.results);
     console.log(json);
   }
   
   function filteredList(){
-    setMovieList(movieList.filter(movie => movie.vote_average>7.5))
+    setFilteredMovieList(movieList.filter(movie => movie.vote_average>7))
   }
 
   return movieList.length === 0 ? (<Shimmer />) :(
@@ -32,8 +34,9 @@ function Body() {
       />
       <button className='bg-orange-500 text-white px-4 py-2 rounded-r hover:bg-orange-600 transition-colors'
       onClick={()=>{
-        const searchMovieList = movieList.filter((movie)=>movie.original_title.includes(searchText));
-        setMovieList(searchMovieList);
+        const searchMovieList = movieList.filter((movie)=>movie.original_title.toLowerCase().includes(searchText.toLowerCase()));
+        setFilteredMovieList(searchMovieList);
+
       }}
       >
         Search
@@ -41,7 +44,7 @@ function Body() {
       <button className='bg-slate-500 text-white px-4 py-2 rounded-r hover:bg-slate-600 transition-colors ml-80'
       onClick={filteredList}>fiteredMovie</button>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-      {movieList.map((item)=>{ 
+      {filteredMovieList.map((item)=>{ 
         return(
         <MovieCard key={item.id} movie={item} />
       )})}
