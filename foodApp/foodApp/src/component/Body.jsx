@@ -19,14 +19,11 @@ function Body() {
   }
   
   function filteredList(){
-    setMovieList(movieList.filter(restrau => restrau.data.avgRating>4))
+    setMovieList(movieList.filter(movie => movie.vote_average>7.5))
   }
 
-  if(movieList.length === 0){
-    return <Shimmer />
-  }
-
-  return (
+  
+  return movieList.length === 0 ? (<Shimmer />) :(
     <div className='space-y-3'>
       <input type="text" placeholder="Search for movie..." 
         className='border border-gray-300 rounded-l px-4 py-2 ml-5 focus:outline-none focus:ring-2 focus:ring-orange-500'
@@ -42,7 +39,7 @@ function Body() {
       )})}
     </div>                             
     </div>
-    
+  
   )
 }
 
