@@ -11,7 +11,7 @@ function Body() {
   },[])
 
   const fetchData = async () =>{
-    const data = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=7874577ec3f51229c6a0ae7a197a2dee`);
+    const data = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
     const json = await data.json();
     setMovieList(json.results)
     console.log(json);
