@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MovieCard from './MovieCard';
 import Shimmer from './Shimmer';
+import { Link } from 'react-router-dom';
 
 
 function Body() {
@@ -46,7 +47,7 @@ function Body() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       {filteredMovieList.map((item)=>{ 
         return(
-        <MovieCard key={item.id} movie={item} />
+          <Link key={item.id} to={'/movies/' + item.id}> <MovieCard  movie={item} /></Link>
       )})}
     </div>                             
     </div>
