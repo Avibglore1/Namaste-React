@@ -7,10 +7,19 @@ class Userclass extends React.Component{
             count: 0,
             sum : 100
         };
+
+        console.log('Child constructor called');
+    }
+    componentDidMount(){
+        console.log('Child component did mount');
+        
     }
     render(){
         const {name,location} = this.props;
         const {count,sum} = this.state;
+
+        console.log('Child render called');
+        
         return(
             <div className='border-4 border-cyan-200 text-center'>
             <h2>{name}</h2>
