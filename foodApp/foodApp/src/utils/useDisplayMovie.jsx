@@ -5,7 +5,7 @@ function useDisplayMovie(movieId) {
 
     useEffect(()=>{
         fetchMovieData()
-    },[])
+    },[movieId])
 
     const fetchMovieData = async() =>{
         try{

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { LOGO_URL } from '../utils/constant'
 import { Link } from 'react-router-dom';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 function Header() {
   const [login,setLogin] = useState('LogIn')
+
+  const onlineStatus = useOnlineStatus()
   return (
     <div className='flex flex-row justify-between items-center border-2'>
         <div>
@@ -11,6 +14,7 @@ function Header() {
             alt="" className='w-20' />
         </div>
         <div className='flex gap-3 mr-5'>
+          <li className='list-none'>Online Status {onlineStatus ? '🟢' : '🔴'}</li>
             <Link to='/'>Home</Link>
             <Link to='/about'>About Us</Link>
             <Link to='/cart'>Cart</Link>

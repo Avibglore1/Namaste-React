@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MovieCard from './MovieCard';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 
 function Body() {
@@ -24,6 +25,9 @@ function Body() {
   function filteredList(){
     setFilteredMovieList(movieList.filter(movie => movie.vote_average>7))
   }
+
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus === false) return <h1>Oops! you are out of internet</h1>
 
   return movieList.length === 0 ? (<Shimmer />) :(
     <div className='space-y-3'>
