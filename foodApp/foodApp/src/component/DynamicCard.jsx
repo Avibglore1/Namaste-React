@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom';
 import Shimmer from './Shimmer';
+import useDisplayMovie from '../utils/useDisplayMovie';
 
 function DynamicCard() {
     const {movieId} = useParams()
-    const [movie,setMovie] = useState(null);
-
-    const fetchMovieData = async() =>{
-        try{
-            const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=en-US`);
-            const data = await response.json();
-            setMovie(data);
-        }catch(err){
-            console.log('err',err);
-            
-        }
-    }
-    useEffect(()=>{
-        fetchMovieData();
-    },[movieId])
+    const movie = useDisplayMovie(movieId);
 
     if(!movie) return <Shimmer/>
 
