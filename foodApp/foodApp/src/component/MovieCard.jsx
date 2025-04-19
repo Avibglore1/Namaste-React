@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import { CDN_LINK } from "../utils/constant"
+import UserContext from "../utils/UerContext"
 
 function MovieCard({ movie }){
+  const {loggedinUser} = useContext(UserContext)
     return(
     <div className="border p-4 rounded-lg shadow-lg">
       <img
@@ -13,6 +15,7 @@ function MovieCard({ movie }){
       <p className="text-gray-600">{movie.release_date}</p>
       <p className="text-gray-800 font-semibold">{movie.popularity}</p>
       <p className="text-yellow-500 font-bold">⭐ {movie.vote_average}</p>
+      <p>{loggedinUser}</p>
     </div>
     )
 }

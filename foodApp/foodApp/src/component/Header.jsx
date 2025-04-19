@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { LOGO_URL } from '../utils/constant'
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UerContext';
 
 function Header() {
   const [login,setLogin] = useState('LogIn')
+  const {loggedinUser} = useContext(UserContext)
 
   const onlineStatus = useOnlineStatus()
   return (
@@ -17,7 +19,8 @@ function Header() {
           <li className='list-none'>Online Status {onlineStatus ? '🟢' : '🔴'}</li>
             <Link to='/'>Home</Link>
             <Link to='/about'>About Us</Link>
-            <Link to='/cart'>Cart</Link>
+            <Link to ='/contact'>Contact</Link>
+            <div>{loggedinUser}</div>
             <button className='border-2 bg-slate-300'
             onClick={()=>{
               login === "LogIn"?setLogin('Logout'):setLogin('LogIn');
