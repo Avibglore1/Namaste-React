@@ -2,11 +2,14 @@ import { Route,Routes } from 'react-router-dom'
 import './App.css'
 import Home from './component/Home'
 import Contact from './component/Contact'
-import PageNotFound from './component/PageNotFound'
-import Header from './component/header'
+import WatchList from './component/WatchList' 
+import Header from './component/Header'
 import DynamicCard from './component/DynamicCard'
 import { lazy, Suspense, useEffect, useState } from 'react'
-import UserContext from './utils/UerContext'
+import UserContext from './utils/UserContext'
+import { Provider } from 'react-redux'
+import store from './utils/watchListstore'
+
 function App() {
   const About = lazy(()=>import('./component/Aboutus'))
   const [userName,setUserName] = useState();
@@ -17,16 +20,19 @@ function App() {
     setUserName(data.name)
   },[])
   return (
-    <UserContext.Provider value={{loggedinUser:userName}}>
+    <Provider store = {store}>
+      <UserContext.Provider value={{loggedinUser:userName}}>
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/about" element={<Suspense fallback={<h1>Loading..</h1>}><About/></Suspense>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
         <Route path='/movies/:movieId' element={<DynamicCard/>}></Route>
-        <Route path='*' element={<PageNotFound/>}></Route>
+        <Route path='/watchlist' element={<WatchList/>}></Route>
       </Routes>
     </UserContext.Provider>
+    </Provider>
+    
   )
 }
 

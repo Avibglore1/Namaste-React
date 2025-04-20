@@ -1,13 +1,18 @@
 import React, { useContext, useState } from 'react'
 import { LOGO_URL } from '../utils/constant'
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
-import UserContext from '../utils/UerContext';
+import UserContext from '../utils/UserContext';
+import {useSelector} from 'react-redux'
+
 
 function Header() {
   const [login,setLogin] = useState('LogIn')
   const {loggedinUser} = useContext(UserContext)
-
+  const watchListItems = useSelector((store) =>store.watchList)
+  console.log(watchListItems);
+  
+  
   const onlineStatus = useOnlineStatus()
   return (
     <div className='flex flex-row justify-between items-center border-2'>
@@ -19,7 +24,7 @@ function Header() {
           <li className='list-none'>Online Status {onlineStatus ? '🟢' : '🔴'}</li>
             <Link to='/'>Home</Link>
             <Link to='/about'>About Us</Link>
-            <Link to ='/contact'>Contact</Link>
+            <Link to ='/watchlist' className='font-bold'>Watchlist ({watchListItems.items.length} items)</Link>
             <div>{loggedinUser}</div>
             <button className='border-2 bg-slate-300'
             onClick={()=>{
