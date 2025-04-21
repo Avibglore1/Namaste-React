@@ -51,7 +51,10 @@ function Body() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       {filteredMovieList.map((item)=>{ 
         return(
-          <Link key={item.id} to={'/movies/' + item.id}> <MovieCard  movie={item} /></Link>
+          <div data-testid="movieCard">
+            <Link key={item.id} to={'/movies/' + item.id}> <MovieCard  movie={item} /></Link>
+          </div>
+          
       )})}
     </div>                             
     </div>
