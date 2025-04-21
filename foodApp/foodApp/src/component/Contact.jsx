@@ -4,7 +4,11 @@ import React, { useEffect } from 'react'
     
     
   return (
-    <h1>Contact</h1>
+    <div>
+         <h1 className='font-bold p-2 '>Contact</h1>
+         <button className='bg-slate-200 p-2 rounded-md shadow-md'>Contact</button>
+    </div>
+   
   )
 }
 

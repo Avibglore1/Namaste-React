@@ -9,7 +9,8 @@ function MovieCard({ movie }){
   const handleAddBtn =(movie)=>{
     dispatch(addItem(movie));
   }
-
+  console.log('movie',movie);
+  
   const {loggedinUser} = useContext(UserContext)
     return(
     <div className="border p-4 rounded-lg shadow-lg">
